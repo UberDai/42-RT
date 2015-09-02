@@ -6,13 +6,15 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 19:57:22 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/01 21:30:52 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/02 20:15:32 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gfx.h"
 #include "rt.h"
 #include "object.h"
+#include "raycast.h"
+#include "vec3.h"
 #include <stdlib.h>
 
 t_rt	rt;
@@ -20,8 +22,10 @@ t_rt	rt;
 void	init(void)
 {
 	rt.gfx = calloc(1, sizeof(t_gfx));
-	rt.gfx->width = 1200;
-	rt.gfx->height= 800;
+	rt.width = 300;
+	rt.height = 300;
+	rt.gfx->width = rt.width;
+	rt.gfx->height= rt.height;
 }
 
 int		main(void)

@@ -13,6 +13,9 @@
 #include "scene.h"
 #include <stdlib.h>
 #include <libft.h>
+#include "rt.h"
+
+extern t_rt	rt;
 
 t_scene		*create_scene(const char *name)
 {
@@ -22,7 +25,7 @@ t_scene		*create_scene(const char *name)
 	new_scene->name = ft_strdup(name);
 	new_scene->objects = new_lst();
 	new_scene->cameras = new_lst();
-	new_scene->active_camera = camera(1200, 800, 60.0f);
+	new_scene->active_camera = camera(rt.width, rt.height, 60.0f);
 	lst_push_back(new_scene->cameras, new_scene->active_camera);
 	return (new_scene);
 }

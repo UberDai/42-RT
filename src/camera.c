@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/08 23:26:47 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/01 21:46:27 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/02 20:20:11 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_camera	*camera(unsigned width, unsigned height, float fov)
 	new_camera = calloc(1, sizeof(t_camera));
 	new_camera->resolution_width = width;
 	new_camera->resolution_height = height;
-	new_camera->viewplane.width = 0.35f;
-	new_camera->viewplane.height = 0.5f;
+	new_camera->viewplane.width = 1.0f;
+	new_camera->viewplane.height = 1.0f;
 	new_camera->viewplane.distance = 1.0f;
 	vec3_set(&new_camera->direction, 0, 0, 1.0f);
 	camera_update_viewplane(new_camera);

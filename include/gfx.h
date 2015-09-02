@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 20:17:38 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/07 22:36:13 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/02 20:18:38 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct			s_color
 	int					hex;
 }						t_color;
 
-struct			s_gfx
+struct					s_gfx
 {
 	void				*mlx;
 	void				*win;

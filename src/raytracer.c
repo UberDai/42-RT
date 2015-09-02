@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:23:18 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/08 23:39:25 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/02 20:17:39 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,16 @@ int		raycast(const t_ray *ray)
 		object = iter.data;
 		if (object->type == SPHERE)
 			hit = raycast_to_sphere(ray, object->shape);
+			closest_hit = hit;
 
 		if (hit != NULL && (closest_hit == NULL || closest_hit->distance > hit->distance))
 			closest_hit = hit;
 	}
 
-	return (COLOR_NONE);
+	if (closest_hit == NULL)
+		return (COLOR_NONE);
+	else
+		return (closest_hit->color);
 }
 
 t_hit	*hit(const t_vec3 *position, float distance, int color)

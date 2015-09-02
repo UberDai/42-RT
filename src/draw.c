@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:20:58 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/01 21:20:43 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/02 20:17:31 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,15 @@
 #include "gfx.h"
 #include <string.h>
 
-static void	set_ray_direction(t_ray *ray, const t_camera *camera, int increment_x, int increment_y)
+static void	set_ray_direction(t_ray *ray, const t_camera *camera, float increment_x, float increment_y)
 {
-	t_vec3	tmp;
-	t_vec3	destination;
+	t_vec3	dest;
 
-	vec3_copy(&destination, &camera->viewplane.upleft);
+	vec3_copy(&dest, &camera->viewplane.upleft);
+	dest.x += increment_x + increment_x / 2;
+	dest.y -= increment_y + increment_y / 2;
 
-	vec3_set(&tmp, increment_x, 0, 0);
-	vec3_add(&destination, &tmp);
-
-	vec3_set(&tmp, 0, increment_y, 0);
-	vec3_add(&destination, &tmp);
-
-	vec3_copy(&ray->direction, &destination);
+	vec3_copy(&ray->direction, &dest);
 	vec3_sub(&ray->direction, &ray->origin);
 	vec3_normalize(&ray->direction);
 }
@@ -41,6 +36,7 @@ void	draw(t_rt *rt)
 	float		increment_y;
 	t_camera	*camera;
 	t_ray		ray;
+	int			color;
 
 	camera = rt->scene->active_camera;
 	increment_x = camera->viewplane.width / camera->resolution_width;
@@ -55,7 +51,8 @@ void	draw(t_rt *rt)
 		while (x < rt->width)
 		{
 			set_ray_direction(&ray, camera, increment_x * x, increment_y * y);
-			raycast(&ray);
+			color = raycast(&ray);
+			draw_pixel(rt->gfx, x, y, color);
 			x++;
 		}
 		y++;

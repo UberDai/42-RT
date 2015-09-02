@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/23 21:04:30 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/07 22:06:36 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/02 20:18:30 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	mlx_initialize(t_gfx *g)
 	g->mlx = mlx_init();
 	if (!g->mlx)
 		die("Count not init mlx");
-	if (!(g->win = mlx_new_window(g->mlx, g->width, g->height, "FDF")))
+	if (!(g->win = mlx_new_window(g->mlx, g->width, g->height, "Raytracer")))
 		die("Could not create the window.");
 	if (!(g->img = mlx_new_image(g->mlx, g->width, g->height)))
 		die("Could not create the image.");
