@@ -14,6 +14,6 @@ typedef struct	s_material
 	float		opacity;
 }				t_material;
 
-t_material		*material(const t_vec3 *ambient, const t_vec3 *diffuse, const t_vec3 *specular);
+t_material		*create_material(const t_vec3 *ambient, const t_vec3 *diffuse, const t_vec3 *specular);
 
 #endif

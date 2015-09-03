@@ -25,7 +25,7 @@ t_scene		*create_scene(const char *name)
 	new_scene->name = ft_strdup(name);
 	new_scene->objects = new_lst();
 	new_scene->cameras = new_lst();
-	new_scene->active_camera = camera(rt.width, rt.height, 60.0f);
+	new_scene->active_camera = camera(rt.width, rt.height, rt.aspect, 60.0f);
 	lst_push_back(new_scene->cameras, new_scene->active_camera);
 	return (new_scene);
 }

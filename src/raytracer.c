@@ -22,7 +22,7 @@
 
 extern t_rt	rt;
 
-static t_hit		*create_hit(const t_ray *ray, float distance, int color)
+static t_hit		*create_hit(const t_ray *ray, float distance, t_vec3 const *color)
 {
 	t_vec3	position;
 
@@ -75,10 +75,10 @@ static t_hit		*raycast_to_sphere(const t_ray *ray, const t_sphere *sphere)
 			return (NULL);
 	}
 
-	return (create_hit(ray, hits[0], COLOR_WHITE));
+	return (create_hit(ray, hits[0], &sphere->material->ambient));
 }
 
-int		raycast(const t_ray *ray)
+t_vec3	*raycast(const t_ray *ray)
 {
 	t_lstiter	iter;
 	t_object	*object;
@@ -92,25 +92,24 @@ int		raycast(const t_ray *ray)
 		object = iter.data;
 		if (object->type == SPHERE)
 			hit = raycast_to_sphere(ray, object->shape);
-			closest_hit = hit;
 
 		if (hit != NULL && (closest_hit == NULL || closest_hit->distance > hit->distance))
 			closest_hit = hit;
 	}
 
 	if (closest_hit == NULL)
-		return (COLOR_NONE);
+		return (NULL);
 	else
-		return (closest_hit->color);
+		return (vec3_clone(&closest_hit->color));
 }
 
-t_hit	*hit(const t_vec3 *position, float distance, int color)
+t_hit	*hit(const t_vec3 *position, float distance, t_vec3 const *color)
 {
 	t_hit	*hit;
 
-	hit = calloc(1, sizeof(t_hit));
-	memcpy(&(hit->position), position, sizeof(t_vec3));
+	hit = (t_hit*)calloc(1, sizeof(t_hit));
+	vec3_copy(&hit->position, position);
+	vec3_copy(&hit->color, color);
 	hit->distance = distance;
-	hit->color = color;
 	return (hit);
 }

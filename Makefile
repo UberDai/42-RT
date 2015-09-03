@@ -27,6 +27,7 @@ SRC_FILES	=	main.c \
 				raytracer.c \
 				camera.c \
 				object.c \
+				material.c \
 				mlx/color1.c \
 				mlx/color2.c \
 				mlx/draw_line.c \

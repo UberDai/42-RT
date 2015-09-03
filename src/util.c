@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include "util.h"
 #include <stdlib.h>
 
 int		die(const char *message)
@@ -18,4 +19,14 @@ int		die(const char *message)
 	ft_putendl(message);
 	exit(EXIT_FAILURE);
 	return (EXIT_FAILURE);
+}
+
+int		vec3_color(t_vec3 const *color)
+{
+	int		int_color;
+
+	int_color = color->x;
+	int_color = (int_color << 8) + color->y;
+	int_color = (int_color << 8) + color->z;
+	return (int_color);
 }

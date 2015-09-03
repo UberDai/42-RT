@@ -13,6 +13,9 @@
 #ifndef UTIL_H
 # define UTIL_H
 
+# include "vec3.h"
+
 int		die(const char *message);
+int		vec3_color(t_vec3 const *color);
 
 #endif

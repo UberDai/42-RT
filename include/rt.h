@@ -23,6 +23,7 @@ typedef struct			s_rt
 {
 	int					width;
 	int					height;
+	float				aspect;
 	t_gfx				*gfx;
 	t_scene				*scene;
 }						t_rt;

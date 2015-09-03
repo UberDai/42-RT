@@ -12,7 +12,7 @@
 
 #include "gfx.h"
 #include "raycast.h"
-#include "gfx.h"
+#include "util.h"
 #include <string.h>
 
 static void	set_ray_direction(t_ray *ray, const t_camera *camera, float increment_x, float increment_y)
@@ -20,8 +20,8 @@ static void	set_ray_direction(t_ray *ray, const t_camera *camera, float incremen
 	t_vec3	dest;
 
 	vec3_copy(&dest, &camera->viewplane.upleft);
-	dest.x += increment_x + increment_x / 2;
-	dest.y -= increment_y + increment_y / 2;
+	dest.x += increment_x;
+	dest.y -= increment_y;
 
 	vec3_copy(&ray->direction, &dest);
 	vec3_sub(&ray->direction, &ray->origin);
@@ -36,7 +36,7 @@ void	draw(t_rt *rt)
 	float		increment_y;
 	t_camera	*camera;
 	t_ray		ray;
-	int			color;
+	t_vec3		*color;
 
 	camera = rt->scene->active_camera;
 	increment_x = camera->viewplane.width / camera->resolution_width;
@@ -52,7 +52,9 @@ void	draw(t_rt *rt)
 		{
 			set_ray_direction(&ray, camera, increment_x * x, increment_y * y);
 			color = raycast(&ray);
-			draw_pixel(rt->gfx, x, y, color);
+
+			if (color != NULL)
+				draw_pixel(rt->gfx, x, y, vec3_color(color));
 			x++;
 		}
 		y++;

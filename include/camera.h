@@ -32,7 +32,7 @@ typedef struct	s_camera
 	t_viewplane	viewplane;
 }				t_camera;
 
-t_camera		*camera(unsigned width, unsigned height, float fov);
+t_camera		*camera(unsigned width, unsigned height, float aspect, float fov);
 void			camera_update_viewplane(t_camera *camera);
 
 #endif

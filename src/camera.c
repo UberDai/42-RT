@@ -38,7 +38,7 @@ void		camera_update_viewplane(t_camera *camera)
 	vec3_sub(upleft, &xVector);
 }
 
-t_camera	*camera(unsigned width, unsigned height, float fov)
+t_camera	*camera(unsigned width, unsigned height, float aspect, float fov)
 {
 	t_camera	*new_camera;
 
@@ -47,7 +47,7 @@ t_camera	*camera(unsigned width, unsigned height, float fov)
 	new_camera->resolution_width = width;
 	new_camera->resolution_height = height;
 	new_camera->viewplane.width = 1.0f;
-	new_camera->viewplane.height = 1.0f;
+	new_camera->viewplane.height = 1.0f / aspect;
 	new_camera->viewplane.distance = 1.0f;
 	vec3_set(&new_camera->direction, 0, 0, 1.0f);
 	camera_update_viewplane(new_camera);
