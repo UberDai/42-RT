@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:20:58 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/02 20:17:31 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/14 00:16:02 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	draw(t_rt *rt)
 			color = raycast(&ray);
 
 			if (color != NULL)
-				draw_pixel(rt->gfx, x, y, vec3_color(color));
+				draw_pixel(rt->gfx, x, y, vec3_to_color(color));
 			x++;
 		}
 		y++;

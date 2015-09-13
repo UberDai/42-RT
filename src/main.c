@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 19:57:22 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/02 20:15:32 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/14 00:24:59 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "raycast.h"
 #include "vec3.h"
 #include "material.h"
+#include "util.h"
 #include <stdlib.h>
 
 t_rt	rt;
@@ -27,7 +28,7 @@ void	init(void)
 	rt.height = 800;
 	rt.aspect = (float)rt.width / rt.height;
 	rt.gfx->width = rt.width;
-	rt.gfx->height= rt.height;
+	rt.gfx->height = rt.height;
 }
 
 int		main(void)
@@ -37,15 +38,15 @@ int		main(void)
 	rt.scene = create_scene("Test");
 
 	t_material	*red = create_material(
-		vec3_new(255, 0, 0),
-		vec3_new(255, 0, 0),
-		vec3_new(255, 0, 0)
+		vec3_new(1.0f, 0, 0),
+		vec3_new(1.0f, 0, 0),
+		vec3_new(1.0f, 0, 0)
 	);
 
 	t_material	*blue = create_material(
-		vec3_new(0, 0, 255),
-		vec3_new(0, 0, 255),
-		vec3_new(0, 0, 255)
+		vec3_new(0, 0, 1.0f),
+		vec3_new(0, 0, 1.0f),
+		vec3_new(0, 0, 1.0f)
 	);
 
 	t_sphere	*new_sphere;
