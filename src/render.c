@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:20:58 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/14 00:16:02 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/15 00:20:42 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "raycast.h"
 #include "util.h"
 #include <string.h>
+#include <stdlib.h>
 
 static void	set_ray_direction(t_ray *ray, const t_camera *camera, float increment_x, float increment_y)
 {
@@ -28,7 +29,7 @@ static void	set_ray_direction(t_ray *ray, const t_camera *camera, float incremen
 	vec3_normalize(&ray->direction);
 }
 
-void	draw(t_rt *rt)
+void	render(t_rt *rt)
 {
 	int			x;
 	int			y;
@@ -36,7 +37,7 @@ void	draw(t_rt *rt)
 	float		increment_y;
 	t_camera	*camera;
 	t_ray		ray;
-	t_vec3		*color;
+	int			color;
 
 	camera = rt->scene->active_camera;
 	increment_x = camera->viewplane.width / camera->resolution_width;
@@ -53,12 +54,11 @@ void	draw(t_rt *rt)
 			set_ray_direction(&ray, camera, increment_x * x, increment_y * y);
 			color = raycast(&ray);
 
-			if (color != NULL)
-				draw_pixel(rt->gfx, x, y, vec3_to_color(color));
+			if (color != COLOR_NONE)
+				draw_pixel(rt->gfx, x, y, color);
 			x++;
 		}
 		y++;
 	}
-
 	mlx_update(rt->gfx);
 }

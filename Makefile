@@ -6,7 +6,7 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/09/14 22:04:22 by amaurer          ###   ########.fr        #
+#    Updated: 2015/09/14 23:05:18 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ BIN_NAME	=	$(BIN_DIR)$(NAME)
 SRC_FILES	=	main.c \
 				vec3.c \
 				util.c \
-				draw.c \
+				render.c \
 				ray.c \
 				scene.c \
 				raycast/raycast.c \

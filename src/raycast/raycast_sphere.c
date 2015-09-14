@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/14 21:56:54 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/14 22:13:53 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/14 23:58:20 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,39 +25,39 @@ static float	select_closest_hit(float hit1, float hit2)
 		hit1 = hit2;
 		hit2 = tmp;
 	}
-
 	if (hit1 < 0)
 	{
 		hit1 = hit2;
 		if (hit1 < 0)
 			return (-1.0f);
 	}
-
 	return (hit1);
 }
 
-t_hit			*raycast_to_sphere(const t_ray *ray, const t_sphere *sphere)
+int		raycast_to_sphere(t_hit *hit, const t_ray *ray, const t_sphere *sphere)
 {
-	t_vec3	L;
+	t_vec3	distance_to_center;
 	float	tca;
 	float	d2;
 	float	thc;
-	float	hit;
+	float	hit_distance;
 
-	memcpy(&L, &sphere->position, sizeof(t_vec3));
-	vec3_sub(&L, &ray->origin);
-	tca = vec3_dot(&L, &ray->direction);
+	vec3_copy(&distance_to_center, &sphere->position);
+	vec3_sub(&distance_to_center, &ray->origin);
+	tca = vec3_dot(&distance_to_center, &ray->direction);
 
 	if (tca < 0)
-		return (NULL);
+		return (0);
 
-	d2 = vec3_dot(&L, &L) - tca * tca;
+	d2 = vec3_dot(&distance_to_center, &distance_to_center) - tca * tca;
 
 	if (d2 > sphere->radius * sphere->radius)
-		return (NULL);
+		return (0);
 
 	thc = sqrt(sphere->radius * sphere->radius - d2);
-	hit = select_closest_hit(tca - thc, tca + thc);
+	hit_distance = select_closest_hit(tca - thc, tca + thc);
 
-	return (create_hit_from_ray(ray, hit, &sphere->material->ambient));
+	update_hit_from_ray(hit, ray, hit_distance, &sphere->material->ambient);
+
+	return (1);
 }

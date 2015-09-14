@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 19:57:22 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/14 00:24:59 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/14 23:49:17 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,35 +31,35 @@ void	init(void)
 	rt.gfx->height = rt.height;
 }
 
-int		main(void)
+void	create_basic_scene(void)
 {
-	init();
-
-	rt.scene = create_scene("Test");
-
-	t_material	*red = create_material(
-		vec3_new(1.0f, 0, 0),
-		vec3_new(1.0f, 0, 0),
-		vec3_new(1.0f, 0, 0)
-	);
-
-	t_material	*blue = create_material(
-		vec3_new(0, 0, 1.0f),
-		vec3_new(0, 0, 1.0f),
-		vec3_new(0, 0, 1.0f)
-	);
-
+	t_vec3		color;
+	t_vec3		position;
+	t_material	*material;
 	t_sphere	*new_sphere;
 	t_object	*new_object;
 
-	new_sphere = create_sphere(vec3_new(-0.5f, 0, 9.7f), 1.0f, red);
-	new_object = create_object("lol", SPHERE, new_sphere);
+	rt.scene = create_scene("Test");
+
+	vec3_set(&color, 1.0f, 0, 0);
+	material = create_material(&color, &color, &color);
+	vec3_set(&position, -0.5f, 0, 9.7f);
+	new_sphere = create_sphere(&position, 1.0f, material);
+	new_object = create_object("sphere1", SPHERE, new_sphere);
 	lst_push_back(rt.scene->objects, new_object);
 
-	new_sphere = create_sphere(vec3_new(0.5f, 0, 10.0f), 1.0f, blue);
-	new_object = create_object("lol", SPHERE, new_sphere);
+	vec3_set(&color, 0, 0, 1.0f);
+	material = create_material(&color, &color, &color);
+	vec3_set(&position, 0.5f, 0, 10.0f);
+	new_sphere = create_sphere(&position, 1.0f, material);
+	new_object = create_object("sphere2", SPHERE, new_sphere);
 	lst_push_back(rt.scene->objects, new_object);
+}
 
+int		main(void)
+{
+	init();
+	create_basic_scene();
 	mlx_initialize(rt.gfx);
 
 	return (0);

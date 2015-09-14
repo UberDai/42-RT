@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/04/23 21:50:07 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/07 22:22:07 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/14 23:05:55 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			hook_key(int keycode, t_rt *rt)
 
 int			hook_expose(t_rt *rt)
 {
-	draw(rt);
+	render(rt);
 	return (0);
 }
 

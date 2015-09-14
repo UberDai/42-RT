@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 20:09:43 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/01 21:13:53 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/15 00:20:28 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <ftlst.h>
 # include "scene.h"
 # include <stdio.h>
+
+# define COLOR_NONE	-1
 
 typedef struct s_gfx	t_gfx;
 
@@ -28,6 +30,6 @@ typedef struct			s_rt
 	t_scene				*scene;
 }						t_rt;
 
-void					draw(t_rt *rt);
+void					render(t_rt *rt);
 
 #endif
