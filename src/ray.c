@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:28:56 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/08 03:39:29 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/14 22:00:21 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-t_ray		*ray(const t_vec3 *origin, const t_vec3 * direction)
+t_ray		*create_ray(const t_vec3 *origin, const t_vec3 * direction)
 {
 	t_ray	*ray;
 

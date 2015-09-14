@@ -6,7 +6,7 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/09/01 21:09:26 by amaurer          ###   ########.fr        #
+#    Updated: 2015/09/14 22:04:22 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ SRC_FILES	=	main.c \
 				draw.c \
 				ray.c \
 				scene.c \
-				raytracer.c \
+				raycast/raycast.c \
+				raycast/hit.c \
+				raycast/raycast_sphere.c \
 				camera.c \
 				object.c \
 				material.c \
