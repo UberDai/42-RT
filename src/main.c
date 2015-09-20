@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 19:57:22 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/14 23:49:17 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/19 20:56:14 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,26 @@ void	create_basic_scene(void)
 	t_vec3		color;
 	t_vec3		position;
 	t_material	*material;
-	t_sphere	*new_sphere;
-	t_object	*new_object;
 
 	rt.scene = create_scene("Test");
 
 	vec3_set(&color, 1.0f, 0, 0);
 	material = create_material(&color, &color, &color);
 	vec3_set(&position, -0.5f, 0, 9.7f);
-	new_sphere = create_sphere(&position, 1.0f, material);
-	new_object = create_object("sphere1", SPHERE, new_sphere);
-	lst_push_back(rt.scene->objects, new_object);
+	lst_push_back(rt.scene->objects,
+		create_object("sphere1", SPHERE,
+			create_sphere(&position, 1.0f, material)
+		)
+	);
 
 	vec3_set(&color, 0, 0, 1.0f);
 	material = create_material(&color, &color, &color);
 	vec3_set(&position, 0.5f, 0, 10.0f);
-	new_sphere = create_sphere(&position, 1.0f, material);
-	new_object = create_object("sphere2", SPHERE, new_sphere);
-	lst_push_back(rt.scene->objects, new_object);
+	lst_push_back(rt.scene->objects,
+		create_object("sphere2", SPHERE,
+			create_sphere(&position, 1.0f, material)
+		)
+	);
 }
 
 int		main(void)

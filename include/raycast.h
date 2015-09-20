@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:33:07 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/15 00:16:28 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/20 21:02:35 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ void			hit_copy(t_hit *dest, const t_hit *hit);
 void			update_hit_from_ray(t_hit *hit, const t_ray *ray, float distance, t_vec3 const *color);
 int				raycast(const t_ray *ray);
 int				raycast_to_sphere(t_hit *hit, const t_ray *ray, const t_sphere *sphere);
+int				raycast_to_poly(t_hit *hit, const t_ray *ray, const t_poly *poly);
 
 #endif
