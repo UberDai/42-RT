@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:23:18 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/15 00:21:34 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/21 21:50:29 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static int	raycast_to_object(t_hit *hit, const t_ray *ray, const t_object *objec
 
 	if (object->type == SPHERE)
 		raycast_result = raycast_to_sphere(hit, ray, object->shape);
+	else if (object->type == PLANE)
+		raycast_result = raycast_to_plane(hit, ray, object->shape);
 	else
 		raycast_result = 0;
 

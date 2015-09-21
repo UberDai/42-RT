@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/08 23:26:47 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/02 20:20:11 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/21 22:12:19 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_camera	*camera(unsigned width, unsigned height, float aspect, float fov)
 	new_camera->viewplane.height = 1.0f / aspect;
 	new_camera->viewplane.distance = 1.0f;
 	vec3_set(&new_camera->direction, 0, 0, 1.0f);
+	vec3_set(&new_camera->position, 0, 0, 0);
 	camera_update_viewplane(new_camera);
 	return (new_camera);
 }

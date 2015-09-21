@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 19:57:22 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/19 20:56:14 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/21 22:09:02 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,16 @@ void	create_basic_scene(void)
 	lst_push_back(rt.scene->objects,
 		create_object("sphere2", SPHERE,
 			create_sphere(&position, 1.0f, material)
+		)
+	);
+
+	vec3_set(&color, 0, 1.0f, 0);
+	material = create_material(&color, &color, &color);
+	vec3_set(&position, 0, -0.5f, 0);
+	vec3_set(&color, 0.2f, 1.0f, 0);
+	lst_push_back(rt.scene->objects,
+		create_object("plane", PLANE,
+			create_plane(&position, &color, material)
 		)
 	);
 }

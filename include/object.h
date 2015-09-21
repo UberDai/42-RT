@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/20 20:59:47 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/20 21:02:15 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/21 22:07:07 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 typedef enum	e_shape
 {
 	POLY = 1,
+	PLANE,
 	SPHERE,
 	CYLINDER,
 	CONE
@@ -37,6 +38,13 @@ typedef struct	s_poly
 	t_vertex	*vertices;
 	t_vec3		normal;
 }				t_poly;
+
+typedef struct	s_plane
+{
+	t_vec3		position;
+	t_vec3		normal;
+	t_material	*material;
+}				t_plane;
 
 typedef struct	s_sphere
 {
@@ -66,6 +74,7 @@ typedef struct	s_object
 	void		*shape;
 }				t_object;
 
+t_plane			*create_plane(const t_vec3 *position, const t_vec3 *normal, t_material *material);
 t_sphere		*create_sphere(const t_vec3 *position, float radius, t_material *material);
 t_cylinder		*create_cylinder(const t_vec3 *position, float radius, const t_vec3 *rotation, t_material *material);
 t_cone			*create_cone(const t_vec3 *position, float angle, const t_vec3 *rotation, t_material *material);
