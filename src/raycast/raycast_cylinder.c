@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/25 04:22:09 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 05:06:05 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/25 07:32:41 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		raycast_to_cylinder(t_hit *hit, const t_ray *ray, const t_cylinder *cylinde
 			return (0);
 
 		hit->distance = select_closest_hit(results[0], results[1]);
-		update_hit_from_ray(hit, ray, hit->distance, &cylinder->material->ambient);
+		update_hit_from_ray(hit, ray, &cylinder->material->ambient);
 
 		// t_vec3 HB;
 		// HB = newPosition;

@@ -6,13 +6,14 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 19:57:22 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 06:28:22 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/25 07:59:14 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gfx.h"
 #include "rt.h"
 #include "object.h"
+#include "light.h"
 #include "raycast.h"
 #include "vec3.h"
 #include "material.h"
@@ -78,14 +79,20 @@ void	create_basic_scene(void)
 		)
 	);
 
-	vec3_set(&color, 0, 1.0f, 1.0f);
-	material = create_material(&color, &color, &color);
-	vec3_set(&position, 10.0f, 0, 0);
-	vec3_set(&axis, 1.0f, 1.0f, -1.0f);
-	lst_push_back(rt.scene->objects,
-		create_object("cone", CONE,
-			create_cone(&position, &axis, 3.0f, 10.0f, material)
-		)
+	// vec3_set(&color, 0, 1.0f, 1.0f);
+	// material = create_material(&color, &color, &color);
+	// vec3_set(&position, 10.0f, 0, 0);
+	// vec3_set(&axis, 1.0f, 1.0f, -1.0f);
+	// lst_push_back(rt.scene->objects,
+	// 	create_object("cone", CONE,
+	// 		create_cone(&position, &axis, 3.0f, 10.0f, material)
+	// 	)
+	// );
+
+	vec3_set(&position, 1.0f, 1.0f, 1.0f);
+	vec3_set(&color, 1.0f, 1.0f, 1.0f);
+	lst_push_back(rt.scene->lights,
+		create_light(&position, 1.0f, &color)
 	);
 }
 

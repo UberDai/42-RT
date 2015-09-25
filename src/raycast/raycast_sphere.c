@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/14 21:56:54 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 04:52:40 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/25 07:33:00 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int		raycast_to_sphere(t_hit *hit, const t_ray *ray, const t_sphere *sphere)
 	float	tca;
 	float	d2;
 	float	thc;
-	float	hit_distance;
 
 	vec3_copy(&distance_to_center, &sphere->position);
 	vec3_sub(&distance_to_center, &ray->origin);
@@ -37,9 +36,9 @@ int		raycast_to_sphere(t_hit *hit, const t_ray *ray, const t_sphere *sphere)
 		return (0);
 
 	thc = sqrt(sphere->radius * sphere->radius - d2);
-	hit_distance = select_closest_hit(tca - thc, tca + thc);
+	hit->distance = select_closest_hit(tca - thc, tca + thc);
 
-	update_hit_from_ray(hit, ray, hit_distance, &sphere->material->ambient);
+	update_hit_from_ray(hit, ray, &sphere->material->ambient);
 
 	return (1);
 }

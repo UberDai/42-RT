@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:57:49 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/01 21:29:21 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/25 07:44:12 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_scene		*create_scene(const char *name)
 	new_scene = calloc(1, sizeof(t_scene));
 	new_scene->name = ft_strdup(name);
 	new_scene->objects = new_lst();
+	new_scene->lights = new_lst();
 	new_scene->cameras = new_lst();
 	new_scene->active_camera = camera(rt.width, rt.height, rt.aspect, 60.0f);
 	lst_push_back(new_scene->cameras, new_scene->active_camera);
