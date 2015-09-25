@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:33:07 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/21 21:50:56 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/25 05:39:38 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include "gfx.h"
 # include "vec3.h"
 # include "object.h"
+
+# define EPSILON	0.0001f
 
 typedef struct	s_ray
 {
@@ -39,5 +41,7 @@ int				raycast(const t_ray *ray);
 int				raycast_to_plane(t_hit *hit, const t_ray *ray, const t_plane *plane);
 int				raycast_to_sphere(t_hit *hit, const t_ray *ray, const t_sphere *sphere);
 int				raycast_to_poly(t_hit *hit, const t_ray *ray, const t_poly *poly);
+int				raycast_to_cylinder(t_hit *hit, const t_ray *ray, const t_cylinder *cylinder);
+int				raycast_to_cone(t_hit *hit, const t_ray *ray, const t_cone *cone);
 
 #endif

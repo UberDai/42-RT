@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/14 21:56:54 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/14 23:58:20 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/25 04:52:40 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,7 @@
 #include <string.h>
 #include "object.h"
 #include "raycast.h"
-
-static float	select_closest_hit(float hit1, float hit2)
-{
-	float	tmp;
-
-	if (hit1 > hit2)
-	{
-		tmp = hit1;
-		hit1 = hit2;
-		hit2 = tmp;
-	}
-	if (hit1 < 0)
-	{
-		hit1 = hit2;
-		if (hit1 < 0)
-			return (-1.0f);
-	}
-	return (hit1);
-}
+#include "util.h"
 
 int		raycast_to_sphere(t_hit *hit, const t_ray *ray, const t_sphere *sphere)
 {

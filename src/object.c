@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/01 20:52:00 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/21 22:07:18 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/25 06:26:16 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,31 @@ t_plane			*create_plane(const t_vec3 *position, const t_vec3 *normal, t_material
 	vec3_copy(&plane->normal, normal);
 	plane->material = material;
 	return (plane);
+}
+
+t_cylinder		*create_cylinder(const t_vec3 *position, const t_vec3 *axis, float radius, t_material *material)
+{
+	t_cylinder	*cylinder;
+
+	cylinder = (t_cylinder*)calloc(1, sizeof(t_cylinder));
+	vec3_copy(&cylinder->position, position);
+	vec3_copy(&cylinder->axis, axis);
+	cylinder->radius = radius;
+	cylinder->material = material;
+	return (cylinder);
+}
+
+t_cone			*create_cone(const t_vec3 *position, const t_vec3 *axis, float radius, float height, t_material *material)
+{
+	t_cone	*cone;
+
+	cone = (t_cone*)calloc(1, sizeof(t_cone));
+	vec3_copy(&cone->position, position);
+	vec3_copy(&cone->axis, axis);
+	cone->radius = radius;
+	cone->height = height;
+	cone->material = material;
+	return (cone);
 }
 
 t_object		*create_object(const char *name, t_shape shape_type, void *shape)
