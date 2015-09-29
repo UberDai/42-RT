@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:33:07 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 07:52:58 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/29 16:14:29 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 # include "vec3.h"
 # include "object.h"
 
-# define EPSILON				0.0001f
-# define REFLECTION_ITERATION	1
+# define EPSILON	0.0001f
+# define MAX_DEPTH	1
 
 typedef struct	s_ray
 {
 	t_vec3		origin;
 	t_vec3		direction;
 	float		length;
+	unsigned	depth;
 }				t_ray;
 
 typedef struct	s_hit
@@ -41,7 +42,7 @@ t_hit			*create_hit(const t_vec3 *position, float distance, t_vec3 const *color)
 void			hit_set(t_hit *hit, const t_vec3 *position, float distance, t_vec3 const *color);
 void			hit_copy(t_hit *dest, const t_hit *hit);
 void			update_hit_from_ray(t_hit *hit, const t_ray *ray, t_vec3 const *color);
-int				raycast(const t_ray *ray);
+int				raycast(const t_ray *ray, unsigned depth);
 int				raycast_to_plane(t_hit *hit, const t_ray *ray, const t_plane *plane);
 int				raycast_to_sphere(t_hit *hit, const t_ray *ray, const t_sphere *sphere);
 int				raycast_to_poly(t_hit *hit, const t_ray *ray, const t_poly *poly);

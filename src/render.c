@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:20:58 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/15 00:20:42 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/09/29 21:39:35 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	render(t_rt *rt)
 		while (x < rt->width)
 		{
 			set_ray_direction(&ray, camera, increment_x * x, increment_y * y);
-			color = raycast(&ray);
+			color = raycast(&ray, 2);
 
 			if (color != COLOR_NONE)
 				draw_pixel(rt->gfx, x, y, color);
