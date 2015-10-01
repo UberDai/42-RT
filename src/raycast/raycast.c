@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:23:18 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/29 21:47:13 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/01 19:12:09 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "object.h"
 #include "light.h"
 #include "util.h"
+#include "color.h"
 #include <ftlst.h>
 #include <string.h>
 #include <stdlib.h>
@@ -26,8 +27,6 @@ extern t_rt	rt;
 static int	raycast_to_object(t_hit *hit, const t_ray *ray, const t_object *object)
 {
 	int		raycast_result;
-
-	hit->object = (t_object *)object;
 
 	if (object->type == SPHERE)
 		raycast_result = raycast_to_sphere(hit, ray, object->shape);
@@ -40,19 +39,23 @@ static int	raycast_to_object(t_hit *hit, const t_ray *ray, const t_object *objec
 	else
 		raycast_result = 0;
 
+	if (raycast_result)
+		hit->object = (t_object *)object;
+
 	return (raycast_result);
 }
 
-static int	raycast_light(t_hit *hit, unsigned depth)
+static void	raycast_light(t_hit *hit, unsigned depth)
 {
 	t_lstiter	it;
 	t_ray		ray;
 	t_light		*light;
 	int			raycast_result;
 	t_vec3		lightness;
+	t_hit		sub_hit;
 
 	if (depth == 0)
-		return (vec3_to_color(&hit->color));
+		return ;
 
 	vec3_set(&lightness, 0, 0, 0);
 	vec3_copy(&ray.origin, &hit->position);
@@ -63,18 +66,15 @@ static int	raycast_light(t_hit *hit, unsigned depth)
 		vec3_copy(&ray.direction, &light->position);
 		vec3_sub(&ray.direction, &ray.origin);
 		vec3_normalize(&ray.direction);
-		raycast_result = raycast(&ray, depth - 1);
+		raycast_result = raycast(&ray, &sub_hit, depth - 1, NULL);
 
-		if (raycast_result)
+		if (sub_hit.object != NULL)
 		{
 			// ray bounce
 		}
 		else
 		{
 			vec3_add(&lightness, &light->color);
-			// hit->color.x *= light->color.x;
-			// hit->color.y *= light->color.y;
-			// hit->color.z *= light->color.z;
 		}
 	}
 
@@ -85,36 +85,47 @@ static int	raycast_light(t_hit *hit, unsigned depth)
 	hit->color.x *= lightness.x;
 	hit->color.y *= lightness.y;
 	hit->color.z *= lightness.z;
-
-	return (vec3_to_color(&hit->color));
 }
 
-int		raycast(const t_ray *ray, unsigned depth)
+int		raycast(const t_ray *ray, t_hit *hit, unsigned depth, t_object *exclude)
 {
 	t_lstiter	it;
 	int			raycast_result;
 	t_hit		closest_hit;
-	t_hit		hit;
+	t_object	*object;
+
+	hit_reset(hit);
 
 	if (depth == 0)
-		return (COLOR_NONE);
+		return (0);
 
-	closest_hit.distance = -1.0f;
+	hit_reset(&closest_hit);
 	init_iter(&it, rt.scene->objects, increasing);
 	while (lst_iterator_next(&it))
 	{
-		raycast_result = raycast_to_object(&hit, ray, (t_object*)it.data);
+		object = (t_object*)it.data;
+
+		if (object == exclude)
+			continue ;
+
+		raycast_result = raycast_to_object(hit, ray, object);
 
 		if (raycast_result)
 		{
-			if (closest_hit.distance == -1.0f || closest_hit.distance > hit.distance)
-				hit_copy(&closest_hit, &hit);
+			if (closest_hit.object == NULL || closest_hit.distance > hit->distance)
+				hit_copy(&closest_hit, hit);
 		}
 	}
 
-	if (closest_hit.distance == -1.0f)
-		return (COLOR_NONE);
+	hit_copy(hit, &closest_hit);
+
+	if (closest_hit.object == NULL)
+	{
+		return (0);
+	}
 	else
-		// return (vec3_to_color(&closest_hit.color));
-		return (raycast_light(&closest_hit, depth - 1));
+	{
+		raycast_light(hit, depth);
+		return (1);
+	}
 }

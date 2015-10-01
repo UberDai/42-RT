@@ -6,7 +6,7 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/09/25 07:44:48 by amaurer          ###   ########.fr        #
+#    Updated: 2015/10/01 19:01:14 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRC_FILES	=	main.c \
 				raycast/raycast_cylinder.c \
 				raycast/raycast_cone.c \
 				light.c \
+				color.c \
 				camera.c \
 				object.c \
 				material.c \

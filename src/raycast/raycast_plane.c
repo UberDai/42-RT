@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/21 21:09:07 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 07:31:55 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/01 18:31:58 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int			raycast_to_plane(t_hit *hit, const t_ray *ray, const t_plane *plane)
 
 	dot = vec3_dot(&ray->direction, &plane->normal);
 
-	if (fabs(dot) < 0.0001f)
+	if (fabs(dot) < EPSILON)
 		return (COLOR_NONE);
 
 	to_origin = vec3_sub_d(&plane->position, &ray->origin);
@@ -30,7 +30,7 @@ int			raycast_to_plane(t_hit *hit, const t_ray *ray, const t_plane *plane)
 
 	free(to_origin);
 
-	if (hit->distance >= 0)
+	if (hit->distance >= EPSILON)
 	{
 		update_hit_from_ray(hit, ray, &plane->material->ambient);
 		return (1);

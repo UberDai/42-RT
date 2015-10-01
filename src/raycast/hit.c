@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/14 21:59:43 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 07:32:27 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/01 17:31:52 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,12 @@ void	hit_set(t_hit *hit, const t_vec3 *position, float distance, t_vec3 const *c
 	vec3_copy(&hit->position, position);
 	vec3_copy(&hit->color, color);
 	hit->distance = distance;
+}
+
+void	hit_reset(t_hit *hit)
+{
+	memset(hit, 0, sizeof(t_hit));
+	hit->distance = -1.0f;
 }
 
 void	update_hit_from_ray(t_hit *hit, const t_ray *ray, const t_vec3 *color)

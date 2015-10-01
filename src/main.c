@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 19:57:22 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 07:59:14 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/01 20:32:33 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,27 @@ void	create_basic_scene(void)
 
 	rt.scene = create_scene("Test");
 
+	// vec3_set(&color, 1.0f, 0, 0);
+	// material = create_material(&color, &color, &color);
+	// vec3_set(&position, -0.5f, 0, 9.7f);
+	// lst_push_back(rt.scene->objects,
+	// 	create_object("sphere1", SPHERE,
+	// 		create_sphere(&position, 1.0f, material)
+	// 	)
+	// );
+
 	vec3_set(&color, 1.0f, 0, 0);
 	material = create_material(&color, &color, &color);
-	vec3_set(&position, -0.5f, 0, 9.7f);
+	vec3_set(&position, -2.0f, 0.0f, 2.0f);
 	lst_push_back(rt.scene->objects,
 		create_object("sphere1", SPHERE,
-			create_sphere(&position, 1.0f, material)
+			create_sphere(&position, 0.5f, material)
 		)
 	);
 
 	vec3_set(&color, 0, 0, 1.0f);
 	material = create_material(&color, &color, &color);
-	vec3_set(&position, 0.5f, 0, 10.0f);
+	vec3_set(&position, 0.0f, 0.0f, 2.0f);
 	lst_push_back(rt.scene->objects,
 		create_object("sphere2", SPHERE,
 			create_sphere(&position, 1.5f, material)
@@ -61,7 +70,7 @@ void	create_basic_scene(void)
 
 	vec3_set(&color, 0, 1.0f, 0);
 	material = create_material(&color, &color, &color);
-	vec3_set(&position, 0, -0.5f, 0);
+	vec3_set(&position, 0, -2.5f, 0);
 	vec3_set(&axis, 0.2f, 1.0f, 0);
 	lst_push_back(rt.scene->objects,
 		create_object("plane", PLANE,
@@ -69,15 +78,15 @@ void	create_basic_scene(void)
 		)
 	);
 
-	vec3_set(&color, 1.0f, 1.0f, 0);
-	material = create_material(&color, &color, &color);
-	vec3_set(&position, 0, 0, 10.0f);
-	vec3_set(&axis, 1.0f, 1.0f, -1.0f);
-	lst_push_back(rt.scene->objects,
-		create_object("cylinder", CYLINDER,
-			create_cylinder(&position, &axis, 0.8f, material)
-		)
-	);
+	// vec3_set(&color, 1.0f, 1.0f, 0);
+	// material = create_material(&color, &color, &color);
+	// vec3_set(&position, 0, 0, 10.0f);
+	// vec3_set(&axis, 1.0f, 1.0f, -1.0f);
+	// lst_push_back(rt.scene->objects,
+	// 	create_object("cylinder", CYLINDER,
+	// 		create_cylinder(&position, &axis, 0.8f, material)
+	// 	)
+	// );
 
 	// vec3_set(&color, 0, 1.0f, 1.0f);
 	// material = create_material(&color, &color, &color);
@@ -89,7 +98,7 @@ void	create_basic_scene(void)
 	// 	)
 	// );
 
-	vec3_set(&position, 1.0f, 1.0f, 1.0f);
+	vec3_set(&position, 5.0f, 3.0f, -4.0f);
 	vec3_set(&color, 1.0f, 1.0f, 1.0f);
 	lst_push_back(rt.scene->lights,
 		create_light(&position, 1.0f, &color)
