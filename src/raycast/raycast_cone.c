@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/25 05:12:15 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 06:52:54 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/05 18:26:33 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ int		raycast_to_cone(t_hit *hit, const t_ray *ray, const t_cone *cone)
 	else
 		hit->distance = select_closest_hit(results[0], results[1]);
 
-	update_hit_from_ray(hit, ray, hit->distance, &cone->material->ambient);
+	if (hit->distance <= RC_EPSILON)
+		return (0);
+
+	update_hit_from_ray(hit, ray, &cone->material->ambient);
 
 	return (1);
 }

@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/07 22:56:27 by amaurer           #+#    #+#             */
-/*   Updated: 2015/10/05 18:31:12 by amaurer          ###   ########.fr       */
+/*   Created: 2015/10/01 19:01:19 by amaurer           #+#    #+#             */
+/*   Updated: 2015/10/01 19:04:19 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#ifndef _COLOR_H
+# define _COLOR_H
 
-# include <ftlst.h>
-# include "camera.h"
+# include "vec3.h"
 
-typedef struct	s_scene
-{
-	char		*name;
-	t_lst		*objects;
-	t_lst		*lights;
-	t_vec3		ambient_light;
-	t_lst		*cameras;
-	t_camera	*active_camera;
-}				t_scene;
-
-t_scene			*create_scene(const char *name);
-void			scene_destroy(t_scene *scene);
+void	color_blend_overlay(t_vec3 *dest, const t_vec3 *src);
 
 #endif

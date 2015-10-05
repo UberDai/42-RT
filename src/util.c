@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:12:04 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 06:06:57 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/05 19:09:31 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "util.h"
 #include <stdlib.h>
 #include <math.h>
+#include <stdio.h>
 
 int		die(const char *message)
 {
@@ -22,13 +23,47 @@ int		die(const char *message)
 	return (EXIT_FAILURE);
 }
 
+void	color_clamp(t_vec3 *color)
+{
+	if (color->x > 1.f)
+		color->x = 1.0f;
+	else if (color->x < 0)
+		color->x = 0;
+	if (color->y > 1.f)
+		color->y = 1.0f;
+	else if (color->y < 0)
+		color->y = 0;
+	if (color->z > 1.f)
+		color->z = 1.0f;
+	else if (color->z < 0)
+		color->z = 0;
+}
+
 int		vec3_to_color(t_vec3 const *color)
 {
 	int		int_color;
+	float	x;
+	float	y;
+	float	z;
 
-	int_color = color->x * 255;
-	int_color = (int_color << 8) + color->y * 255;
-	int_color = (int_color << 8) + color->z * 255;
+	x = color->x;
+	if (x > 1.f)
+		x = 1.0f;
+	else if (x < 0)
+		x = 0;
+	y = color->y;
+	if (y > 1.f)
+		y = 1.0f;
+	else if (y < 0)
+		y = 0;
+	z = color->z;
+	if (z > 1.f)
+		z = 1.0f;
+	else if (z < 0)
+		z = 0;
+	int_color = x * 255;
+	int_color = (int_color << 8) + y * 255;
+	int_color = (int_color << 8) + z * 255;
 	return (int_color);
 }
 

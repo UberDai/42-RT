@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/09/25 04:22:09 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 05:06:05 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/05 18:26:32 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		raycast_to_cylinder(t_hit *hit, const t_ray *ray, const t_cylinder *cylinde
 
 	length = vec3_magnitude(&n);
 
-	if (length < EPSILON && length > -EPSILON)
+	if (length < RC_EPSILON && length > -RC_EPSILON)
 		return (0);
 
 	vec3_normalize(&n);
@@ -57,11 +57,11 @@ int		raycast_to_cylinder(t_hit *hit, const t_ray *ray, const t_cylinder *cylinde
 		results[0] = t - s;
 		results[1] = t + s;
 
-		if (results[0] < -EPSILON && results[1] < -EPSILON)
+		if (results[0] < -RC_EPSILON && results[1] < -RC_EPSILON)
 			return (0);
 
 		hit->distance = select_closest_hit(results[0], results[1]);
-		update_hit_from_ray(hit, ray, hit->distance, &cylinder->material->ambient);
+		update_hit_from_ray(hit, ray, &cylinder->material->ambient);
 
 		// t_vec3 HB;
 		// HB = newPosition;

@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:20:58 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/15 00:20:42 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/05 19:52:19 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ void	render(t_rt *rt)
 	float		increment_y;
 	t_camera	*camera;
 	t_ray		ray;
-	int			color;
+	t_hit		hit;
+
+	if (rt->rendered)
+	{
+		mlx_update(rt->gfx);
+		return ;
+	}
 
 	camera = rt->scene->active_camera;
 	increment_x = camera->viewplane.width / camera->resolution_width;
@@ -52,13 +58,17 @@ void	render(t_rt *rt)
 		while (x < rt->width)
 		{
 			set_ray_direction(&ray, camera, increment_x * x, increment_y * y);
-			color = raycast(&ray);
+			raycast(&ray, &hit, 2, NULL);
 
-			if (color != COLOR_NONE)
-				draw_pixel(rt->gfx, x, y, color);
+			if (hit.object != NULL)
+				draw_pixel(rt->gfx, x, y, vec3_to_color(&hit.color));
+			else
+				draw_pixel(rt->gfx, x, y, 0x333333);
 			x++;
 		}
 		y++;
 	}
+
+	rt->rendered = 1;
 	mlx_update(rt->gfx);
 }

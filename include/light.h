@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scene.h                                            :+:      :+:    :+:   */
+/*   light.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/07/07 22:56:27 by amaurer           #+#    #+#             */
-/*   Updated: 2015/10/05 18:31:12 by amaurer          ###   ########.fr       */
+/*   Created: 2015/09/25 07:34:22 by amaurer           #+#    #+#             */
+/*   Updated: 2015/09/25 07:58:53 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCENE_H
-# define SCENE_H
+#ifndef _LIGHT_H
+# define _LIGHT_H
 
-# include <ftlst.h>
-# include "camera.h"
+# include "vec3.h"
 
-typedef struct	s_scene
+typedef enum	e_light
 {
-	char		*name;
-	t_lst		*objects;
-	t_lst		*lights;
-	t_vec3		ambient_light;
-	t_lst		*cameras;
-	t_camera	*active_camera;
-}				t_scene;
+	POINT
+}				e_light;
 
-t_scene			*create_scene(const char *name);
-void			scene_destroy(t_scene *scene);
+typedef struct	s_light
+{
+	e_light		type;
+	t_vec3		position;
+	float		intensity;
+	t_vec3		color;
+}				t_light;
+
+t_light	*create_light(const t_vec3 *position, float intensity, const t_vec3 *color);
 
 #endif

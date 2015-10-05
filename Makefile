@@ -6,14 +6,15 @@
 #    By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/11 01:49:54 by amaurer           #+#    #+#              #
-#    Updated: 2015/09/25 05:37:50 by amaurer          ###   ########.fr        #
+#    Updated: 2015/10/05 19:51:30 by amaurer          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 SRC_DIR		=	src/
 OBJ_DIR		=	build/
-INC_DIR		=	include libft ftlst minilibx
+INC_DIR		=	include libft minilibx \
+				/nfs/zfs-student-5/users/2013/amaurer/libs/ftlst
 BIN_DIR		=	bin/
 
 NAME		=	rtv1
@@ -31,6 +32,8 @@ SRC_FILES	=	main.c \
 				raycast/raycast_poly.c \
 				raycast/raycast_cylinder.c \
 				raycast/raycast_cone.c \
+				light.c \
+				color.c \
 				camera.c \
 				object.c \
 				material.c \
@@ -48,9 +51,10 @@ OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.c=.o))
 
 CC			=	clang
 CC_FLAGS	=	-Wall -Werror -Wextra -pedantic -g3
-CC_LIBS		=	-lft -Llibft -lftlst -Lftlst -lmlx -Lminilibx -framework OpenGL -framework AppKit
+CC_LIBS		=	-lftlst -L/nfs/zfs-student-5/users/2013/amaurer/libs/ftlst \
+				-lft -Llibft -lftlst -Lftlst -lmlx -Lminilibx -framework OpenGL -framework AppKit
 
-all: ftlst libft minilibx $(BIN_NAME)
+all: libft minilibx $(BIN_NAME)
 	@echo "\033[32m•\033[0m $(NAME) is ready."
 
 $(BIN_NAME): $(OBJ)
@@ -63,12 +67,10 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 
 clean:
 	make -C libft clean
-	make -C ftlst clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
 	make -C libft fclean
-	make -C ftlst fclean
 	rm -rf $(BIN_NAME)
 
 re: fclean all
@@ -79,10 +81,4 @@ libft:
 minilibx:
 	@make -C minilibx
 
-ftlst:
-	git submodule init
-	git submodule update
-	git submodule foreach git pull origin 42
-	make -C ftlst
-
-.PHONY: all re fclean clean libft ftlst minilibx
+.PHONY: all re fclean clean libft minilibx

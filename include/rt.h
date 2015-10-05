@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 20:09:43 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/15 00:20:28 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/05 19:11:55 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_gfx	t_gfx;
 
 typedef struct			s_rt
 {
+	int					rendered;
 	int					width;
 	int					height;
 	float				aspect;

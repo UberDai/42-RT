@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 22:11:32 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/25 06:06:53 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/05 18:53:53 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ int		vec3_to_color(t_vec3 const *color);
 t_vec3	*color_to_vec3(t_vec3 *vec, int color);
 float	select_closest_hit(float hit1, float hit2);
 int		solve_quadratic(float a, float b, float c, float results[2]);
+void	color_clamp(t_vec3 *color);
 
 #endif

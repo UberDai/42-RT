@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 19:59:48 by amaurer           #+#    #+#             */
-/*   Updated: 2015/07/09 00:14:10 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/05 18:27:55 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,12 @@ t_vec3			*vec3_cross_d(const t_vec3 *vector1, const t_vec3 *vector2);
 void			vec3_add(t_vec3 *vector, const t_vec3 *modifier);
 void			vec3_sub(t_vec3 *vector, const t_vec3 *modifier);
 void			vec3_mult(t_vec3 *vector, float factor);
+void			vec3_div(t_vec3 *vector, float factor);
 
 t_vec3			*vec3_add_d(const t_vec3 *vector, const t_vec3 *modifier);
 t_vec3			*vec3_sub_d(const t_vec3 *vector, const t_vec3 *modifier);
 t_vec3			*vec3_mult_d(const t_vec3 *vector, float factor);
+t_vec3			*vec3_div_d(const t_vec3 *vector, float factor);
 
 int				vec3_is_null(const t_vec3 *vector);
 int				vec3_equals(const t_vec3 *vector1, const t_vec3 *vector2);

@@ -6,7 +6,7 @@
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/07/07 19:06:58 by amaurer           #+#    #+#             */
-/*   Updated: 2015/09/01 21:10:19 by amaurer          ###   ########.fr       */
+/*   Updated: 2015/10/05 18:28:08 by amaurer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,13 @@ void			vec3_mult(t_vec3 *vector, float factor)
 	vector->z *= factor;
 }
 
+void			vec3_div(t_vec3 *vector, float factor)
+{
+	vector->x /= factor;
+	vector->y /= factor;
+	vector->z /= factor;
+}
+
 void			vec3_cross(t_vec3 *vector1, const t_vec3 *vector2)
 {
 	float	x;
@@ -164,6 +171,15 @@ t_vec3			*vec3_mult_d(const t_vec3 *vector, float factor)
 
 	out = vec3_clone(vector);
 	vec3_mult(out, factor);
+	return (out);
+}
+
+t_vec3			*vec3_div_d(const t_vec3 *vector, float factor)
+{
+	t_vec3	*out;
+
+	out = vec3_clone(vector);
+	vec3_div(out, factor);
 	return (out);
 }
 
