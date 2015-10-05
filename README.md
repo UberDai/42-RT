@@ -10,6 +10,8 @@
 RT is a C raytracer.
 
 ### Features
+*All the features are not implemented yet.*
+
 * Lights
 * Primitives (Sphere, plan, cylinder, cone, polygon)
 * Textures
