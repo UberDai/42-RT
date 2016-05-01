@@ -52,7 +52,7 @@ OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.c=.o))
 CC			=	clang
 CC_FLAGS	=	-Wall -Werror -Wextra -pedantic -g3
 CC_LIBS		=	-lftlst -L$(HOME)/libs/ftlst \
-				-lft -Llibft -lftlst -Lftlst -lmlx -Lminilibx -framework OpenGL -framework AppKit
+				-lft -Llibft -lmlx -Lminilibx -framework OpenGL -framework AppKit
 
 all: libft minilibx $(BIN_NAME)
 	@echo "\033[32m•\033[0m $(NAME) is ready."

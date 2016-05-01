@@ -8,7 +8,6 @@ OBJ=$(OBJ1:.m=.o)
 CFLAGS+=-O2
 
 all: $(NOM)
-	@echo "\033[32m•\033[0m $(NOM) is ready."
 
 $(NOM):	$(OBJ)
 	ar -r $(NOM) $(OBJ)
