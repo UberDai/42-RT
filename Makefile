@@ -37,6 +37,7 @@ SRC_FILES	=	main.c \
 				camera.c \
 				object.c \
 				material.c \
+				parser/parser.c \
 				mlx/color1.c \
 				mlx/color2.c \
 				mlx/draw_line.c \

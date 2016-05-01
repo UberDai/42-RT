@@ -18,6 +18,7 @@
 #include "vec3.h"
 #include "material.h"
 #include "util.h"
+#include "parser.h"
 #include <stdlib.h>
 
 t_rt	rt;
@@ -105,8 +106,9 @@ void	create_basic_scene(void)
 int		main(void)
 {
 	init();
-	create_basic_scene();
-	mlx_initialize(rt.gfx);
+	// create_basic_scene();
+	parse_scene_file("scenes/00");
+	// mlx_initialize(rt.gfx);
 
 	return (0);
 }

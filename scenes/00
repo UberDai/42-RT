@@ -1,0 +1,31 @@
+scene		test
+
+material	red
+	ambient		1.0f	1.0f	1.0f
+	diffuse		1.0f	1.0f	1.0f
+	specular	1.0f	1.0f	1.0f
+
+material	green
+	ambient		1.0f	1.0f	1.0f
+	diffuse		1.0f	1.0f	1.0f
+	specular	1.0f	1.0f	1.0f
+
+material	blue
+	ambient		1.0f	1.0f	1.0f
+	diffuse		1.0f	1.0f	1.0f
+	specular	1.0f	1.0f	1.0f
+
+sphere		sphere1
+	position	-2.0f	0.0f	1.0f
+	radius		0.5f
+	material	red
+
+sphere		sphere2
+	position	0.0f	0.0f	2.0f
+	radius		1.5f
+	material	blue
+
+plane		plane1
+	position	0.0f	0.0f	2.0f
+	axis		0.2f	1.0f	0
+	material	green
