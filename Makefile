@@ -14,7 +14,7 @@
 SRC_DIR		=	src/
 OBJ_DIR		=	build/
 INC_DIR		=	include libft minilibx \
-				/nfs/zfs-student-5/users/2013/amaurer/libs/ftlst
+				$(HOME)/libs/ftlst
 BIN_DIR		=	bin/
 
 NAME		=	rtv1
@@ -51,7 +51,7 @@ OBJ			=	$(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.c=.o))
 
 CC			=	clang
 CC_FLAGS	=	-Wall -Werror -Wextra -pedantic -g3
-CC_LIBS		=	-lftlst -L/nfs/zfs-student-5/users/2013/amaurer/libs/ftlst \
+CC_LIBS		=	-lftlst -L$(HOME)/libs/ftlst \
 				-lft -Llibft -lftlst -Lftlst -lmlx -Lminilibx -framework OpenGL -framework AppKit
 
 all: libft minilibx $(BIN_NAME)
