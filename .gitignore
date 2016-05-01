@@ -33,3 +33,6 @@
 
 bin/
 build/
+
+.DS_Store
+._*
