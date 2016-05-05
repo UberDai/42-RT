@@ -64,11 +64,10 @@ static unsigned			count_options(char **lines)
 	return (i);
 }
 
-static parsing_sect_t	*parse_section(char ** lines, size_t *index)
+static parsing_sect_t	*extract_section(char ** lines, size_t *index)
 {
 	parsing_sect_t	*section;
 	char			**tokens;
-	unsigned		option_count;
 	unsigned		i;
 	
 	section = NEW(parsing_sect_t);
@@ -83,8 +82,8 @@ static parsing_sect_t	*parse_section(char ** lines, size_t *index)
 
 	++*index;
 
-	option_count = count_options(lines + *index);
-	section->options = malloc(sizeof(char**) * (option_count + 1));
+	section->option_count = count_options(lines + *index);
+	section->options = malloc(sizeof(char**) * (section->option_count + 1));
 
 	i = 0;
 	while (lines[*index] && lines[*index][0] == '\t')
@@ -113,7 +112,7 @@ static t_lst	*parse_file(const char *content)
 	i = 0;
 	while (lines[i] != NULL)
 	{
-		section = parse_section(lines, &i);
+		section = extract_section(lines, &i);
 		lst_push_back(sections, section);
 	}
 
@@ -122,7 +121,7 @@ static t_lst	*parse_file(const char *content)
 	return (sections);
 }
 
-static void	redirect_parsing(char ** tokens)
+static void	parse_section(const parsing_sect_t *section, t_scene *scene)
 {
 	size_t			i;
 	parsing_route_t	*route;
@@ -134,9 +133,9 @@ static void	redirect_parsing(char ** tokens)
 	{
 		route = &parsing_routes_g[i];
 
-		if (ft_strequ(route->name, tokens[0]))
+		if (ft_strequ(route->name, section->type))
 		{
-			route->parser(tokens);
+			route->parser(section, scene);
 			return ;
 		}
 
@@ -144,7 +143,7 @@ static void	redirect_parsing(char ** tokens)
 	}
 
 	error_message = NULL;
-	asprintf(&error_message, "Unknown keyword \"%s\".", tokens[0]);
+	asprintf(&error_message, "Unknown type \"%s\".", section->type);
 	die(error_message);
 }
 
@@ -186,35 +185,34 @@ static void	print_sections(t_lst *sections)
 	}
 }
 
+static t_scene	*parse_sections(t_lst *sections)
+{
+	t_scene		*scene;
+	t_lstiter	it;
+
+	scene = create_scene("Unnamed");
+
+	init_iter(&it, sections, increasing);
+
+	while (lst_iterator_next(&it))
+	{
+		parse_section(it.data, scene);
+	}
+
+	return scene;
+}
+
 t_scene		*parse_scene_file(const char *filepath)
 {
 	char	*content;
 	t_lst	*sections;
-	size_t	i;
 
 	content = get_file_content(filepath);
 	sections = parse_file(content);
 
 	print_sections(sections);
 
-	i = 0;
-
-	// while (0 && tokens[i] != NULL)
-	{
-		(void)redirect_parsing;
-		++i;
-	}
-
-	// while (*tokens != NULL)
-	// {
-	// 	while (**tokens != NULL)
-	// 	{
-	// 		printf("%s | ", **tokens);
-	// 		++*tokens;
-	// 	}
-	// 	printf("\n");
-	// 	++tokens;
-	// }
+	parse_sections(sections);
 
 	return (NULL);
 }

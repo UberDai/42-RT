@@ -11,12 +11,14 @@
 /* ************************************************************************** */
 
 #include "object.h"
+#include "parser.h"
 
-void		*parse_sphere(char ** tokens)
+void		*parse_sphere(const parsing_sect_t *section, t_scene *scene)
 {
 	t_sphere	*sphere;
 	
-	(void)tokens;
+	(void)section;
+	(void)scene;
 	sphere = create_sphere(0, 0, 0);
 
 	return (sphere);

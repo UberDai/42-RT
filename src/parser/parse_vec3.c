@@ -13,20 +13,24 @@
 #include "vec3.h"
 #include "util.h"
 
-void		*parse_vec3(const char **tokens)
+void		*parse_vec3(char **tokens)
 {
 	t_vec3	*vec;
 
-	vec = NEW(t_vec3);
+	vec = vec3_zero();
 
 	if (tokens[0] != NULL)
+	{
 		vec->x = ft_atoi(tokens[0]);
 
-	if (tokens[1] != NULL)
-		vec->y = ft_atoi(tokens[1]);
+		if (tokens[1] != NULL)
+		{
+			vec->y = ft_atoi(tokens[1]);
 
-	if (tokens[2] != NULL)
-		vec->z = ft_atoi(tokens[2]);
+			if (tokens[2] != NULL)
+				vec->z = ft_atoi(tokens[2]);
+		}
+	}
 
 	return (vec);
 }

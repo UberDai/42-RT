@@ -17,20 +17,21 @@
 
 typedef struct
 {
-	char		*name;
-	void		*(*parser)(char **);
-}				parsing_route_t;
-
-typedef struct
-{
 	char		*type;
 	char		*name;
 	char		***options;
+	unsigned	option_count;
 }				parsing_sect_t;
 
+typedef struct
+{
+	char		*name;
+	void		*(*parser)(const parsing_sect_t *, t_scene *);
+}				parsing_route_t;
+
 t_scene		*parse_scene_file(const char *filepath);
-void		*parse_scene(char **tokens);
-void		*parse_sphere(char **tokens);
+void		*parse_scene(const parsing_sect_t *section, t_scene *scene);
+void		*parse_sphere(const parsing_sect_t *section, t_scene *scene);
 void		*parse_vec3(char **tokens);
 
 #endif

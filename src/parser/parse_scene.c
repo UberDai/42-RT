@@ -12,8 +12,9 @@
 
 #include "parser.h"
 
-void		*parse_scene(char ** tokens)
+void		*parse_scene(const parsing_sect_t *section, t_scene *scene)
 {
-	(void)tokens;
+	(void)section;
+	(void)scene;
 	return NULL;
 }
