@@ -38,6 +38,9 @@ SRC_FILES	=	main.c \
 				object.c \
 				material.c \
 				parser/parser.c \
+				parser/parse_scene.c \
+				parser/parse_sphere.c \
+				parser/parse_vec3.c \
 				mlx/color1.c \
 				mlx/color2.c \
 				mlx/draw_line.c \

@@ -13,11 +13,14 @@
 #ifndef UTIL_H
 # define UTIL_H
 
+# include <stdlib.h>
+# include <libft.h>
 # include "vec3.h"
 
 # define QUADRATIC_NONE	0
 # define QUADRATIC_ONE	1
 # define QUADRATIC_TWO	2
+# define NEW(X)			(X*)malloc(sizeof(X));
 
 int		die(const char *message);
 int		vec3_to_color(t_vec3 const *color);

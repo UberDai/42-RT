@@ -10,27 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "vec3.h"
+#include "util.h"
 
-# include "scene.h"
-
-typedef struct
+void		*parse_vec3(const char **tokens)
 {
-	char		*name;
-	void		*(*parser)(char **);
-}				parsing_route_t;
+	t_vec3	*vec;
 
-typedef struct
-{
-	char		*type;
-	char		*name;
-	char		***options;
-}				parsing_sect_t;
+	vec = NEW(t_vec3);
 
-t_scene		*parse_scene_file(const char *filepath);
-void		*parse_scene(char **tokens);
-void		*parse_sphere(char **tokens);
-void		*parse_vec3(char **tokens);
+	if (tokens[0] != NULL)
+		vec->x = ft_atoi(tokens[0]);
 
-#endif
+	if (tokens[1] != NULL)
+		vec->y = ft_atoi(tokens[1]);
+
+	if (tokens[2] != NULL)
+		vec->z = ft_atoi(tokens[2]);
+
+	return (vec);
+}

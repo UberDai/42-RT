@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,27 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "parser.h"
 
-# include "scene.h"
-
-typedef struct
+void		*parse_scene(char ** tokens)
 {
-	char		*name;
-	void		*(*parser)(char **);
-}				parsing_route_t;
-
-typedef struct
-{
-	char		*type;
-	char		*name;
-	char		***options;
-}				parsing_sect_t;
-
-t_scene		*parse_scene_file(const char *filepath);
-void		*parse_scene(char **tokens);
-void		*parse_sphere(char **tokens);
-void		*parse_vec3(char **tokens);
-
-#endif
+	(void)tokens;
+	return NULL;
+}
