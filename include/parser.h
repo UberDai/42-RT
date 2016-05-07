@@ -32,6 +32,7 @@ typedef struct
 t_scene		*parse_scene_file(const char *filepath);
 void		*parse_scene(const parsing_sect_t *section, t_scene *scene);
 void		*parse_sphere(const parsing_sect_t *section, t_scene *scene);
-void		*parse_vec3(char **tokens);
+void		*parse_material(const parsing_sect_t *section, t_scene *scene);
+void		parse_vec3(char **tokens, t_vec3 *vec);
 
 #endif

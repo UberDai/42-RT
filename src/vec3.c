@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include <math.h>
+#include "vec3.h"
 
 t_vec3	*vec3_new(float x, float y, float z)
 {
@@ -214,4 +215,14 @@ void			vec3_set(t_vec3 *vector, float x, float y, float z)
 void			vec3_copy(t_vec3 *dest, const t_vec3 *src)
 {
 	memcpy(dest, src, sizeof(t_vec3));
+}
+
+char			*vec3_to_string(const t_vec3 *vec)
+{
+	char	*str;
+
+	str = NULL;
+	asprintf(&str, "vec3(%f, %f, %f)", vec->x, vec->y, vec->z);
+
+	return (str);
 }

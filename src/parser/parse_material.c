@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amaurer <amaurer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,23 +10,34 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "vec3.h"
-#include "util.h"
+#include "material.h"
+#include "parser.h"
+#include <stdio.h>
 
-void		parse_vec3(char **tokens, t_vec3 *vec)
+static void	set_color(const parsing_sect_t *section, unsigned i, t_vec3 *vec)
 {
-	vec3_set(vec, 0, 0, 0);
+	if (section->option_count > i)
+		parse_vec3(section->options[i] + 1, vec);
+	else
+		vec3_set(vec, 0, 0, 0);
+}
 
-	if (tokens[0] != NULL)
-	{
-		vec->x = ft_atoi(tokens[0]);
+void		*parse_material(const parsing_sect_t *section, t_scene *scene)
+{
+	t_material	*material;
+	t_vec3		ambient;
+	t_vec3		diffuse;
+	t_vec3		specular;
 
-		if (tokens[1] != NULL)
-		{
-			vec->y = ft_atoi(tokens[1]);
+	set_color(section, 0, &ambient);
+	set_color(section, 1, &diffuse);
+	set_color(section, 2, &specular);
 
-			if (tokens[2] != NULL)
-				vec->z = ft_atoi(tokens[2]);
-		}
-	}
+	material = create_material(section->name, &ambient, &diffuse, &specular);
+
+	printf("%s\n", material_to_string(material));
+
+	lst_push_back(scene->materials, material);
+
+	return (material);
 }

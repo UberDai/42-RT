@@ -60,4 +60,6 @@ void			vec3_swap(t_vec3 **vector1, t_vec3 **vector2);
 void			vec3_set(t_vec3 *vector, float x, float y, float z);
 void			vec3_copy(t_vec3 *dest, const t_vec3 *src);
 
+char			*vec3_to_string(const t_vec3 *vec);
+
 #endif

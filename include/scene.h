@@ -23,6 +23,7 @@ typedef struct	s_scene
 	t_lst		*lights;
 	t_vec3		ambient_light;
 	t_lst		*cameras;
+	t_lst		*materials;
 	t_camera	*active_camera;
 }				t_scene;
 

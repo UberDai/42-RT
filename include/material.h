@@ -6,6 +6,7 @@
 
 typedef struct	s_material
 {
+	char		*name;
 	t_vec3		ambient;
 	t_vec3		diffuse;
 	t_vec3		specular;
@@ -14,6 +15,7 @@ typedef struct	s_material
 	float		opacity;
 }				t_material;
 
-t_material		*create_material(const t_vec3 *ambient, const t_vec3 *diffuse, const t_vec3 *specular);
+t_material		*create_material(const char *name, const t_vec3 *ambient, const t_vec3 *diffuse, const t_vec3 *specular);
+char			*material_to_string(const t_material *material);
 
 #endif

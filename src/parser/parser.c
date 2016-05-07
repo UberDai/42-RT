@@ -21,6 +21,7 @@
 parsing_route_t		parsing_routes_g[] = {
 	{ "scene", parse_scene },
 	{ "sphere", parse_sphere },
+	{ "material", parse_material },
 	{ NULL, NULL }
 };
 

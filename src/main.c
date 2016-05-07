@@ -43,7 +43,7 @@ void	create_basic_scene(void)
 	rt.scene = create_scene("Test");
 
 	vec3_set(&color, 1.0f, 0, 0);
-	material = create_material(&color, &color, &color);
+	material = create_material("mat", &color, &color, &color);
 	vec3_set(&position, -2.0f, 0.0f, 2.0f);
 	lst_push_back(rt.scene->objects,
 		create_object("sphere1", SPHERE,
@@ -52,7 +52,7 @@ void	create_basic_scene(void)
 	);
 
 	vec3_set(&color, 0, 0, 1.0f);
-	material = create_material(&color, &color, &color);
+	material = create_material("mat", &color, &color, &color);
 	vec3_set(&position, 0.0f, 0.0f, 2.0f);
 	lst_push_back(rt.scene->objects,
 		create_object("sphere2", SPHERE,
@@ -61,7 +61,7 @@ void	create_basic_scene(void)
 	);
 
 	vec3_set(&color, 0, 1.0f, 0);
-	material = create_material(&color, &color, &color);
+	material = create_material("mat", &color, &color, &color);
 	vec3_set(&position, 0, -2.5f, 0);
 	vec3_set(&axis, 0.2f, 1.0f, 0);
 	lst_push_back(rt.scene->objects,
@@ -71,7 +71,7 @@ void	create_basic_scene(void)
 	);
 
 	// vec3_set(&color, 1.0f, 1.0f, 0);
-	// material = create_material(&color, &color, &color);
+	// material = create_material("mat", &color, &color, &color);
 	// vec3_set(&position, 0, 0, 10.0f);
 	// vec3_set(&axis, 1.0f, 1.0f, -1.0f);
 	// lst_push_back(rt.scene->objects,
@@ -81,7 +81,7 @@ void	create_basic_scene(void)
 	// );
 
 	// vec3_set(&color, 0, 1.0f, 1.0f);
-	// material = create_material(&color, &color, &color);
+	// material = create_material("mat", &color, &color, &color);
 	// vec3_set(&position, 10.0f, 0, 0);
 	// vec3_set(&axis, 1.0f, 1.0f, -1.0f);
 	// lst_push_back(rt.scene->objects,

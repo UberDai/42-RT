@@ -26,6 +26,7 @@ t_scene		*create_scene(const char *name)
 	new_scene->objects = new_lst();
 	new_scene->lights = new_lst();
 	new_scene->cameras = new_lst();
+	new_scene->materials = new_lst();
 	vec3_set(&new_scene->ambient_light, 0.2f, 0.2f, 0.2f);
 	new_scene->active_camera = camera(rt.width, rt.height, rt.aspect, 60.0f);
 	lst_push_back(new_scene->cameras, new_scene->active_camera);
