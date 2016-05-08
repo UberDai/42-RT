@@ -11,9 +11,10 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <libft.h>
-#include "material.h"
 #include <stdio.h>
+#include <libft.h>
+#include <ftlst.h>
+#include "material.h"
 
 t_material		*create_material(const char *name, const t_vec3 *ambient, const t_vec3 *diffuse, const t_vec3 *specular)
 {
@@ -34,7 +35,6 @@ char			*material_to_string(const t_material *material)
 	char	*diffuse;
 	char	*specular;
 
-	str = NULL;
 	ambient = vec3_to_string(&material->ambient);
 	diffuse = vec3_to_string(&material->diffuse);
 	specular = vec3_to_string(&material->specular);
@@ -54,4 +54,21 @@ char			*material_to_string(const t_material *material)
 	free(specular);
 
 	return (str);
+}
+
+t_material		*get_material(const t_scene *scene, const char *name)
+{
+	t_lstiter	it;
+	t_material	*material;
+
+	init_iter(&it, scene->materials, increasing);
+	while (lst_iterator_next(&it))
+	{
+		material = (t_material*)it.data;
+
+		if (ft_strequ(material->name, name))
+			return (material);
+	}
+
+	return (NULL);
 }

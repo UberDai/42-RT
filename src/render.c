@@ -46,6 +46,10 @@ void	render(t_rt *rt)
 	}
 
 	camera = rt->scene->active_camera;
+
+	if (camera == NULL)
+		die("No main camera set.");
+	
 	increment_x = camera->viewplane.width / camera->resolution_width;
 	increment_y = camera->viewplane.height / camera->resolution_height;
 

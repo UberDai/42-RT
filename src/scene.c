@@ -10,9 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <libft.h>
+#include <ftlst.h>
+#include "scene.h"
+#include "object.h"
+#include "material.h"
+#include "light.h"
+#include "camera.h"
 #include "rt.h"
 
 extern t_rt	rt;
@@ -28,8 +34,6 @@ t_scene		*create_scene(const char *name)
 	new_scene->cameras = new_lst();
 	new_scene->materials = new_lst();
 	vec3_set(&new_scene->ambient_light, 0.2f, 0.2f, 0.2f);
-	new_scene->active_camera = camera(rt.width, rt.height, rt.aspect, 60.0f);
-	lst_push_back(new_scene->cameras, new_scene->active_camera);
 	return (new_scene);
 }
 
@@ -37,5 +41,49 @@ void		scene_destroy(t_scene *scene)
 {
 	lst_destroy(&(scene->objects), free);
 	lst_destroy(&(scene->cameras), free);
+	lst_destroy(&(scene->lights), free);
+	lst_destroy(&(scene->materials), free);
 	free(scene);
+}
+
+void		print_scene(const t_scene *scene)
+{
+	char		*str;
+	t_lstiter	it;
+
+	printf("-- OBJECTS -----------------------------------\n");
+	init_iter(&it, scene->objects, increasing);
+	while (lst_iterator_next(&it))
+	{
+		str = object_to_string((t_object*)it.data);
+		printf("%s\n", str);
+		free(str);
+	}
+
+	printf("\n-- MATERIALS -------------------------------\n");
+	init_iter(&it, scene->materials, increasing);
+	while (lst_iterator_next(&it))
+	{
+		str = material_to_string((t_material*)it.data);
+		printf("%s\n", str);
+		free(str);
+	}
+
+	printf("\n-- LIGHTS ----------------------------------\n");
+	init_iter(&it, scene->lights, increasing);
+	while (lst_iterator_next(&it))
+	{
+		str = light_to_string((t_light*)it.data);
+		printf("%s\n", str);
+		free(str);
+	}
+
+	printf("\n-- CAMERAS ----------------------------------\n");
+	init_iter(&it, scene->cameras, increasing);
+	while (lst_iterator_next(&it))
+	{
+		str = camera_to_string((t_camera*)it.data);
+		printf("%s\n", str);
+		free(str);
+	}
 }

@@ -3,6 +3,7 @@
 # define MATERIAL_H
 
 # include "vec3.h"
+# include "scene.h"
 
 typedef struct	s_material
 {
@@ -17,5 +18,6 @@ typedef struct	s_material
 
 t_material		*create_material(const char *name, const t_vec3 *ambient, const t_vec3 *diffuse, const t_vec3 *specular);
 char			*material_to_string(const t_material *material);
+t_material		*get_material(const t_scene *scene, const char *name);
 
 #endif

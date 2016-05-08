@@ -12,7 +12,6 @@
 
 #include "material.h"
 #include "parser.h"
-#include <stdio.h>
 
 static void	set_color(const parsing_sect_t *section, unsigned i, t_vec3 *vec)
 {
@@ -34,9 +33,6 @@ void		*parse_material(const parsing_sect_t *section, t_scene *scene)
 	set_color(section, 2, &specular);
 
 	material = create_material(section->name, &ambient, &diffuse, &specular);
-
-	printf("%s\n", material_to_string(material));
-
 	lst_push_back(scene->materials, material);
 
 	return (material);

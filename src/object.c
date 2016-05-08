@@ -13,6 +13,7 @@
 #include "object.h"
 #include <libft.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 t_sphere		*create_sphere(const t_vec3 *position, float radius, t_material *material)
 {
@@ -25,6 +26,27 @@ t_sphere		*create_sphere(const t_vec3 *position, float radius, t_material *mater
 	return (sphere);
 }
 
+char			*sphere_to_string(const t_sphere *sphere)
+{
+	char	*str;
+	char	*position;
+
+	position = vec3_to_string(&sphere->position);
+
+	asprintf(&str, "sphere(\n"
+		"   position: %s,\n"
+		"   radius: %f,\n"
+		"   material: %s\n"
+		")",
+		position,
+		sphere->radius,
+		sphere->material->name);
+
+	free(position);
+
+	return (str);
+}
+
 t_plane			*create_plane(const t_vec3 *position, const t_vec3 *normal, t_material *material)
 {
 	t_plane		*plane;
@@ -34,6 +56,29 @@ t_plane			*create_plane(const t_vec3 *position, const t_vec3 *normal, t_material
 	vec3_copy(&plane->normal, normal);
 	plane->material = material;
 	return (plane);
+}
+
+char			*plane_to_string(const t_plane *plane)
+{
+	char	*str;
+	char	*position;
+	char	*normal;
+
+	position = vec3_to_string(&plane->position);
+	normal = vec3_to_string(&plane->normal);
+
+	asprintf(&str, "plane(\n"
+		"   position: %s,\n"
+		"   normal: %s,\n"
+		"   material: %s\n"
+		")",
+		position,
+		normal,
+		plane->material->name);
+
+	free(position);
+
+	return (str);
 }
 
 t_cylinder		*create_cylinder(const t_vec3 *position, const t_vec3 *axis, float radius, t_material *material)
@@ -70,4 +115,18 @@ t_object		*create_object(const char *name, t_shape shape_type, void *shape)
 	object->type = shape_type;
 	object->shape = shape;
 	return (object);
+}
+
+char			*object_to_string(const t_object *object)
+{
+	char	*str;
+	
+	if (object->type == SPHERE)
+		str = sphere_to_string(object->shape);
+	else if (object->type == PLANE)
+		str = plane_to_string(object->shape);
+	else
+		asprintf(&str, "No printer available for this type.");
+
+	return (str);
 }

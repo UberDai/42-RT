@@ -12,6 +12,7 @@
 
 #include "light.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 t_light		*create_light(const t_vec3 *position, float intensity, const t_vec3 *color)
 {
@@ -22,4 +23,28 @@ t_light		*create_light(const t_vec3 *position, float intensity, const t_vec3 *co
 	vec3_copy(&light->color, color);
 	light->intensity = intensity;
 	return (light);
+}
+
+char			*light_to_string(const t_light *light)
+{
+	char	*str;
+	char	*position;
+	char	*color;
+
+	position = vec3_to_string(&light->position);
+	color = vec3_to_string(&light->color);
+
+	asprintf(&str, "light(\n"
+		"   position: %s,\n"
+		"   color: %s,\n"
+		"   intensity: %f\n"
+		")",
+		position,
+		color,
+		light->intensity);
+
+	free(position);
+	free(color);
+
+	return (str);
 }

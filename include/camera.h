@@ -15,6 +15,8 @@
 
 # include "vec3.h"
 
+typedef struct s_scene	t_scene;
+
 typedef struct	s_viewplane
 {
 	float		width;
@@ -25,6 +27,7 @@ typedef struct	s_viewplane
 
 typedef struct	s_camera
 {
+	char		*name;
 	t_vec3		position;
 	t_vec3		direction;
 	unsigned	resolution_width;
@@ -32,7 +35,9 @@ typedef struct	s_camera
 	t_viewplane	viewplane;
 }				t_camera;
 
-t_camera		*camera(unsigned width, unsigned height, float aspect, float fov);
+t_camera		*create_camera(unsigned width, unsigned height, float aspect, float fov);
 void			camera_update_viewplane(t_camera *camera);
+char			*camera_to_string(const t_camera *camera);
+t_camera		*get_camera(const t_scene *scene, const char *name);
 
 #endif

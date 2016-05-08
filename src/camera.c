@@ -10,10 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "camera.h"
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
+#include <libft.h>
+#include <ftlst.h>
+#include "scene.h"
 
 void		camera_update_viewplane(t_camera *camera)
 {
@@ -38,12 +40,13 @@ void		camera_update_viewplane(t_camera *camera)
 	vec3_sub(upleft, &xVector);
 }
 
-t_camera	*camera(unsigned width, unsigned height, float aspect, float fov)
+t_camera	*create_camera(unsigned width, unsigned height, float aspect, float fov)
 {
 	t_camera	*new_camera;
 
 	(void)fov;
 	new_camera = calloc(1, sizeof(t_camera));
+	new_camera->name = ft_strdup("Unnamed");
 	new_camera->resolution_width = width;
 	new_camera->resolution_height = height;
 	new_camera->viewplane.width = 1.0f;
@@ -53,4 +56,47 @@ t_camera	*camera(unsigned width, unsigned height, float aspect, float fov)
 	vec3_set(&new_camera->position, 0, 0, -10.0f);
 	camera_update_viewplane(new_camera);
 	return (new_camera);
+}
+
+char		*camera_to_string(const t_camera *camera)
+{
+	char	*str;
+	char	*position;
+	char	*direction;
+
+	position = vec3_to_string(&camera->position);
+	direction = vec3_to_string(&camera->direction);
+
+	asprintf(&str, "camera %s(\n"
+		"   position: %s,\n"
+		"   direction: %s,\n"
+		"   resolution: %ux%u\n"
+		")",
+		camera->name,
+		position,
+		direction,
+		camera->resolution_width,
+		camera->resolution_height);
+
+	free(position);
+	free(direction);
+
+	return (str);
+}
+
+t_camera		*get_camera(const t_scene *scene, const char *name)
+{
+	t_lstiter	it;
+	t_camera	*camera;
+
+	init_iter(&it, scene->cameras, increasing);
+	while (lst_iterator_next(&it))
+	{
+		camera = (t_camera*)it.data;
+
+		if (ft_strequ(camera->name, name))
+			return (camera);
+	}
+
+	return (NULL);
 }

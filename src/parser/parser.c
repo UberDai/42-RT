@@ -21,7 +21,10 @@
 parsing_route_t		parsing_routes_g[] = {
 	{ "scene", parse_scene },
 	{ "sphere", parse_sphere },
+	{ "plane", parse_plane },
+	{ "light", parse_light },
 	{ "material", parse_material },
+	{ "camera", parse_camera },
 	{ NULL, NULL }
 };
 
@@ -186,12 +189,9 @@ static void	print_sections(t_lst *sections)
 	}
 }
 
-static t_scene	*parse_sections(t_lst *sections)
+static t_scene	*parse_sections(t_lst *sections, t_scene *scene)
 {
-	t_scene		*scene;
 	t_lstiter	it;
-
-	scene = create_scene("Unnamed");
 
 	init_iter(&it, sections, increasing);
 
@@ -207,13 +207,13 @@ t_scene		*parse_scene_file(const char *filepath)
 {
 	char	*content;
 	t_lst	*sections;
+	t_scene	*scene;
 
 	content = get_file_content(filepath);
 	sections = parse_file(content);
+	scene = create_scene("Unnamed");
+	(void)print_sections;
+	parse_sections(sections, scene);
 
-	print_sections(sections);
-
-	parse_sections(sections);
-
-	return (NULL);
+	return (scene);
 }

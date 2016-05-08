@@ -78,7 +78,9 @@ typedef struct	s_object
 }				t_object;
 
 t_plane			*create_plane(const t_vec3 *position, const t_vec3 *normal, t_material *material);
+char			*plane_to_string(const t_plane *plane);
 t_sphere		*create_sphere(const t_vec3 *position, float radius, t_material *material);
+char			*sphere_to_string(const t_sphere *sphere);
 t_cylinder		*create_cylinder(const t_vec3 *position, const t_vec3 *axis, float radius, t_material *material);
 t_cone			*create_cone(const t_vec3 *position, const t_vec3 *axis, float radius, float height, t_material *material);
 t_vertex		*create_vertex(const t_vec3 *position, t_material *material);
@@ -87,5 +89,6 @@ void			poly_add(const t_vertex *vertex);
 void			poly_remove(const t_vertex *vertex);
 
 t_object		*create_object(const char *name, t_shape shape_type, void *shape);
+char			*object_to_string(const t_object *object);
 
 #endif

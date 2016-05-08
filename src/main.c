@@ -33,82 +33,12 @@ void	init(void)
 	rt.gfx->height = rt.height;
 }
 
-void	create_basic_scene(void)
-{
-	t_vec3		color;
-	t_vec3		position;
-	t_vec3		axis;
-	t_material	*material;
-
-	rt.scene = create_scene("Test");
-
-	vec3_set(&color, 1.0f, 0, 0);
-	material = create_material("mat", &color, &color, &color);
-	vec3_set(&position, -2.0f, 0.0f, 2.0f);
-	lst_push_back(rt.scene->objects,
-		create_object("sphere1", SPHERE,
-			create_sphere(&position, 0.5f, material)
-		)
-	);
-
-	vec3_set(&color, 0, 0, 1.0f);
-	material = create_material("mat", &color, &color, &color);
-	vec3_set(&position, 0.0f, 0.0f, 2.0f);
-	lst_push_back(rt.scene->objects,
-		create_object("sphere2", SPHERE,
-			create_sphere(&position, 1.5f, material)
-		)
-	);
-
-	vec3_set(&color, 0, 1.0f, 0);
-	material = create_material("mat", &color, &color, &color);
-	vec3_set(&position, 0, -2.5f, 0);
-	vec3_set(&axis, 0.2f, 1.0f, 0);
-	lst_push_back(rt.scene->objects,
-		create_object("plane", PLANE,
-			create_plane(&position, &axis, material)
-		)
-	);
-
-	// vec3_set(&color, 1.0f, 1.0f, 0);
-	// material = create_material("mat", &color, &color, &color);
-	// vec3_set(&position, 0, 0, 10.0f);
-	// vec3_set(&axis, 1.0f, 1.0f, -1.0f);
-	// lst_push_back(rt.scene->objects,
-	// 	create_object("cylinder", CYLINDER,
-	// 		create_cylinder(&position, &axis, 0.8f, material)
-	// 	)
-	// );
-
-	// vec3_set(&color, 0, 1.0f, 1.0f);
-	// material = create_material("mat", &color, &color, &color);
-	// vec3_set(&position, 10.0f, 0, 0);
-	// vec3_set(&axis, 1.0f, 1.0f, -1.0f);
-	// lst_push_back(rt.scene->objects,
-	// 	create_object("cone", CONE,
-	// 		create_cone(&position, &axis, 3.0f, 10.0f, material)
-	// 	)
-	// );
-
-	vec3_set(&position, 5.0f, 3.0f, -4.0f);
-	vec3_set(&color, 1.0f, 1.0f, 1.0f);
-	lst_push_back(rt.scene->lights,
-		create_light(&position, 1.0f, &color)
-	);
-
-	vec3_set(&position, -3.0f, 3.0f, -4.0f);
-	vec3_set(&color, 1.0f, 1.0f, 1.0f);
-	lst_push_back(rt.scene->lights,
-		create_light(&position, 1.0f, &color)
-	);
-}
-
 int		main(void)
 {
 	init();
-	// create_basic_scene();
-	parse_scene_file("scenes/00");
-	// mlx_initialize(rt.gfx);
+	rt.scene = parse_scene_file("scenes/00");
+	print_scene(rt.scene);
+	mlx_initialize(rt.gfx);
 
 	return (0);
 }

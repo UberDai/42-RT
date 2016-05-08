@@ -221,7 +221,6 @@ char			*vec3_to_string(const t_vec3 *vec)
 {
 	char	*str;
 
-	str = NULL;
 	asprintf(&str, "vec3(%f, %f, %f)", vec->x, vec->y, vec->z);
 
 	return (str);

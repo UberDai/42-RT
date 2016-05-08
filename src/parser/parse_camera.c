@@ -12,39 +12,42 @@
 
 #include <stdlib.h>
 #include <libft.h>
-#include "object.h"
+#include "camera.h"
 #include "parser.h"
 #include "util.h"
 
-void		*parse_sphere(const parsing_sect_t *section, t_scene *scene)
+void		*parse_camera(const parsing_sect_t *section, t_scene *scene)
 {
-	t_sphere	*sphere;
-	t_object	*object;
+	t_camera	*camera;
 	t_vec3		position;
-	t_material	*material;
-	float		radius;
+	t_vec3		direction;
+	t_vec3		resolution;
 	
-	vec3_set(&position, 0, 0, 0);
+	vec3_set(&position, 0.f, 0.f, 0.f);
 	
 	if (section->option_count > 0)
 		parse_vec3(section->options[0] + 1, &position);
 
-	radius = 0.f;
-
+	vec3_set(&direction, 1.f, 1.f, 1.f);
+	
 	if (section->option_count > 1)
-		radius = atof(section->options[1][1]);
+		parse_vec3(section->options[1] + 1, &direction);
 
-	material = NULL;
-
+	vec3_set(&resolution, 1.f, 1.f, 1.f);
+	
 	if (section->option_count > 2)
-		material = get_material(scene, section->options[2][1]);
+		parse_vec3(section->options[2] + 1, &resolution);
 
-	if (material == NULL)
-		die("Unknown material.");
+	camera = create_camera(resolution.x, resolution.y, resolution.x / resolution.y, 60.f);
+	
+	if (camera->name != NULL)
+		free(camera->name);
 
-	sphere = create_sphere(&position, radius, material);
-	object = create_object(section->name, SPHERE, sphere);
-	lst_push_back(scene->objects, object);
+	camera->name = ft_strdup(section->name);
+	vec3_copy(&camera->position, &position);
+	vec3_copy(&camera->direction, &direction);
 
-	return (sphere);
+	lst_push_back(scene->cameras, camera);
+
+	return (camera);
 }

@@ -1,19 +1,30 @@
+camera		camera1
+	position	0.0f	0.0f	-10.0f
+	direction	0.0f	0.0f	1.0f
+	resolution	1200	800
+
+camera		camera2
+	position	0.0f	0.0f	-12.0f
+	direction	0.0f	0.0f	1.0f
+	resolution	1200	800
+
 scene		test
+	maincam		camera1
 
 material	red
-	ambient		1.0f	1.0f	1.0f
-	diffuse		1.0f	1.0f	1.0f
-	specular	1.0f	1.0f	1.0f
+	ambient		1.0f	0.0f	0.0f
+	diffuse		1.0f	0.0f	0.0f
+	specular	1.0f	0.0f	0.0f
 
 material	green
-	ambient		1.0f	1.0f	1.0f
-	diffuse		1.0f	1.0f	1.0f
-	specular	1.0f	1.0f	1.0f
+	ambient		0.0f	1.0f	0.0f
+	diffuse		0.0f	1.0f	0.0f
+	specular	0.0f	1.0f	0.0f
 
 material	blue
-	ambient		1.0f	1.0f	1.0f
-	diffuse		1.0f	1.0f	1.0f
-	specular	1.0f	1.0f	1.0f
+	ambient		0.0f	0.0f	1.0f
+	diffuse		0.0f	0.0f	1.0f
+	specular	0.0f	0.0f	1.0f
 
 sphere		sphere1
 	position	-2.0f	0.0f	1.0f
@@ -26,6 +37,16 @@ sphere		sphere2
 	material	blue
 
 plane		plane1
-	position	0.0f	0.0f	2.0f
-	axis		0.2f	1.0f	0
+	position	0.0f	-2.5f	0.0f
+	normal		0.2f	1.0f	0
 	material	green
+
+light		light1
+	position	5.0f	3.0f	-4.0f
+	color		1.0f	1.0f	1.0f
+	intensity	1.0f
+
+light		light2
+	position	-3.0f	3.0f	-4.0f
+	color		1.0f	1.0f	1.0f
+	intensity	1.0f

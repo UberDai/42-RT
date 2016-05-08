@@ -29,5 +29,6 @@ typedef struct	s_scene
 
 t_scene			*create_scene(const char *name);
 void			scene_destroy(t_scene *scene);
+void			print_scene(const t_scene *scene);
 
 #endif
